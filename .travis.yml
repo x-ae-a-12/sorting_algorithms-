@@ -1,0 +1,15 @@
+language: python
+python: 'latest'
+
+sudo required
+cache: pip 
+
+install: pip3 install -r requirements.txt
+
+stages:
+  - test
+  # - lint
+
+test:
+  stage: test
+  script: python -m unittest discover -p "*_test.py"

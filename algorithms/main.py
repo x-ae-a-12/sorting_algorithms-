@@ -10,12 +10,12 @@ class Sorter:
         pass
 
     @staticmethod
-    def simple_1v1_model(array: np.ndarray or list) ->np.ndarray or list:
+    def _simple_1v1_model(array: np.ndarray or list) ->np.ndarray or list:
         """
         compares two elements and sets the biggest one forward;
         makes it repeatedly while no permutations are made;
-        :param array
-        :return: array
+        :param array or list
+        :return: array or list
         """
         flag = True
         while flag:
@@ -27,12 +27,12 @@ class Sorter:
         return array
 
     @staticmethod
-    def simple_1v1_quicker_model(array: np.ndarray or list) ->np.ndarray or list:
+    def _simple_1v1_quicker_model(array: np.ndarray or list) ->np.ndarray or list:
         """
         quicker realisation of previous model;
         compares current element with previous one and swaps if previous is bigger;
-        :param array
-        :return: array
+        :param array or list
+        :return: array or list
         """
         for index in range(1, len(array)):
             current_element = array[index]
@@ -43,11 +43,29 @@ class Sorter:
             array[item_before+1] = current_element
         return array
 
-    @staticmethod
-    def quickest_model(array: np.ndarray or list) ->np.ndarray or list:
+    def _quickest_model(self, array: np.ndarray or list) ->np.ndarray or list:
         """
         this realisation is based on Tony Hoare algorithm;
-        :param array: 
-        :return:
+        :param array or list
+        :return: array or list
         """
-        pass
+        if len(array) <= 1:
+            return array
+        else:
+            items = [[], [], [], array[(len(array)//2)-2]]
+            for number in array:
+                if number > items[3]:
+                    items[1].append(number)
+                elif number < items[3]:
+                    items[0].append(number)
+                else:
+                    items[2].append(number)
+            return self._quickest_model(items[0]) + items[2] + self._quickest_model(items[1])
+
+    def performer(self, array: np.ndarray or list, flag='1') ->np.ndarray or list:
+        if flag == '1':
+            return self._quickest_model(array)
+        elif flag == '2':
+            return self._simple_1v1_quicker_model(array)
+        elif flag == '3':
+            return self._simple_1v1_model(array)

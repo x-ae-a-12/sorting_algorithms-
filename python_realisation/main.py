@@ -63,9 +63,9 @@ class Sorter:
             return self._quickest_model(items[0]) + items[2] + self._quickest_model(items[1])
 
     def performer(self, array: np.ndarray or list, flag='1') ->np.ndarray or list:
-        if flag == '1':
-            return self._quickest_model(array)
-        elif flag == '2':
+        if flag == '2':
             return self._simple_1v1_quicker_model(array)
         elif flag == '3':
             return self._simple_1v1_model(array)
+        else:
+            return self._quickest_model(array)

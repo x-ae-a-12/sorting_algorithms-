@@ -1,4 +1,3 @@
-// c++ simple realisation of sorting algorithm;
 #include<iostream>
 
 using namespace std;
